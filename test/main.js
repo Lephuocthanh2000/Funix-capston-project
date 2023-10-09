@@ -1,19 +1,25 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
 
-describe('Greeter', function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory('Greeter')
-    const greeter = await Greeter.deploy('Hello, world!')
-    await greeter.deployed()
+const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers')
+// const { waffle } = require('hardhat')
 
-    expect(await greeter.greet()).to.equal('Hello, world!')
+describe('Funix Pricing Chain', function () {
+  async function deployContractFixture() {
+    const [admin] = await ethers.getSigners()
+    const Main = await ethers.getContractFactory('Main')
+    const contract = await Main.deploy()
 
-    const setGreetingTx = await greeter.setGreeting('Hola, mundo!')
-
-    // wait until the transaction is mined
-    await setGreetingTx.wait()
-
-    expect(await greeter.greet()).to.equal('Hola, mundo!')
+    return {
+      admin,
+      contract,
+    }
+  }
+  describe('Deployment', function () {
+    it('Should set the right admin', async function () {
+      const { admin, contract } = await loadFixture(deployContractFixture)
+      const contractOwner = await contract.admin()
+      expect(contractOwner).to.equal(admin.address)
+    })
   })
 })
