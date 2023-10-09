@@ -1,10 +1,9 @@
 {
-  "name": "pricingchain_1",
+  "name": "blockchain-capstone-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Online product valuation application using Blockchain technology.",
   "main": "index.js",
   "scripts": {
-    "frontend": "npm run start --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
