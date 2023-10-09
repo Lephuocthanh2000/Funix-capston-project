@@ -1,11 +1,10 @@
-SPDX-License-Identifier: Unlicense
+//SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
 import "./Session.sol";
 import "./SharedStruct.sol";
 
 contract Main {
-
     address[] public participantKeys;
     mapping(address => Participant) public participants;
     mapping(address => bool) public isSession;
@@ -25,7 +24,10 @@ contract Main {
         _;
     }
     modifier validParticipant() {
-        require(participants[msg.sender].account != address(0), "Not registered");
+        require(
+            participants[msg.sender].account != address(0),
+            "Not registered"
+        );
         _;
     }
 
@@ -55,10 +57,10 @@ contract Main {
         return newSession;
     }
 
-    function register(string memory _fullName, string memory _email)
-        external
-        returns (bool)
-    {
+    function register(
+        string memory _fullName,
+        string memory _email
+    ) external returns (bool) {
         //only for address that has not registered
         require(participants[msg.sender].account == address(0));
         Participant memory newParticipant = Participant({
@@ -74,17 +76,16 @@ contract Main {
         return true;
     }
 
-    function updateParticipantDeviation(address _account, uint256 _deviation)
-        external
-        onlySessionContract()
-    {
+    function updateParticipantDeviation(
+        address _account,
+        uint256 _deviation
+    ) external onlySessionContract {
         participants[_account].deviation = _deviation;
     }
 
-    function incrementParticipantNumberOfSession(address _account)
-        external
-        onlySessionContract()
-    {
+    function incrementParticipantNumberOfSession(
+        address _account
+    ) external onlySessionContract {
         participants[_account].numberOfJoinedSession += 1;
     }
 

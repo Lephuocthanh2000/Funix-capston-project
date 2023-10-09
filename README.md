@@ -1,5 +1,8 @@
+# blockchain-capstone-project
 
-# Sample Hardhat Project
+Online product valuation application using Blockchain technology.
+
+# Hardhat Project
 
 This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
 
@@ -12,6 +15,3 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
-=======
-# blockchain-capstone-project
-Online product valuation application using Blockchain technology.

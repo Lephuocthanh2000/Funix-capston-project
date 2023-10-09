@@ -1,6 +1,6 @@
 require('@nomiclabs/hardhat-waffle')
 require('@nomiclabs/hardhat-etherscan')
-require('hardhat-deploy')
+// require('hardhat-deploy')
 require('dotenv').config()
 
 /**
@@ -27,41 +27,41 @@ module.exports = {
       chainId: 31337,
       allowUnlimitedContractSize: true,
     },
-    localhost: {
-      chainId: 31337,
-    },
-    bscTestnet: {
-      url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      chainId: 97,
-    },
-    sepolia: {
-      url: 'https://rpc.sepolia.dev',
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      chainId: 11155111,
-    },
-    goerli: {
-      url: GOERLI_RPC_URL,
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      saveDeployments: true,
-      chainId: 5,
-    },
-    rinkeby: {
-      url: RINKEBY_RPC_URL,
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      saveDeployments: true,
-      chainId: 4,
-    },
+    // localhost: {
+    //   chainId: 31337,
+    // },
+    // bscTestnet: {
+    //   url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+    //   accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+    //   chainId: 97,
+    // },
+    // sepolia: {
+    //   url: 'https://rpc.sepolia.dev',
+    //   accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+    //   chainId: 11155111,
+    // },
+    // goerli: {
+    //   url: GOERLI_RPC_URL,
+    //   accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+    //   saveDeployments: true,
+    //   chainId: 5,
+    // },
+    // rinkeby: {
+    //   url: RINKEBY_RPC_URL,
+    //   accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+    //   saveDeployments: true,
+    //   chainId: 4,
+    // },
   },
-  etherscan: {
-    apiKey: {
-      // rinkeby: ETHERSCAN_API_KEY,
-      // goerli: ETHERSCAN_API_KEY,
-      polygon: POLYGONSCAN_API_KEY,
-      // sepolia: ETHERSCAN_API_KEY,
-      // bscTestnet: ETHERSCAN_API_KEY,
-    },
-  },
+  // etherscan: {
+  //   apiKey: {
+  //     // rinkeby: ETHERSCAN_API_KEY,
+  //     // goerli: ETHERSCAN_API_KEY,
+  //     polygon: POLYGONSCAN_API_KEY,
+  //     // sepolia: ETHERSCAN_API_KEY,
+  //     // bscTestnet: ETHERSCAN_API_KEY,
+  //   },
+  // },
   // gasReporter: {
   //   enabled: REPORT_GAS,
   //   currency: 'USD',
