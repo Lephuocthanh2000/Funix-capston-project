@@ -114,27 +114,3 @@ describe('Funix Pricing Chain: Main Contract', () => {
     })
   })
 })
-
-//   it('should allow the admin to create a new session', async () => {
-//     const productName = 'Product A'
-//     const productDescription = 'Description of Product A'
-//     const productImages = ['image1.jpg', 'image2.jpg']
-//     const sessionDuration = 3600 // 1 hour
-
-//     const newSession = await mainContractInstance.createNewSession(
-//       productName,
-//       productDescription,
-//       productImages,
-//       sessionDuration,
-//       { from: admin }
-//     )
-
-//     const sessionContractAddress = newSession.logs[0].args.sessionAddress
-//     const isSession = await mainContractInstance.getIsSession(
-//       sessionContractAddress
-//     )
-
-//     assert.equal(isSession, true, 'Session not created correctly')
-//   })
-
-// Add more test cases as needed.

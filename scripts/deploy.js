@@ -11,12 +11,11 @@ async function main() {
   console.log(`Deploying the contract with the account: ${address}`)
 
   const Main = await hre.ethers.getContractFactory('Main')
-  const contract = await Main.deploy()
+  const contractMain = await Main.deploy()
 
-  console.log('Contract  deployed to:', contract.address)
-  await contract.deployed()
-
-  saveContractFiles(contract)
+  console.log('Contract  deployed to:', contractMain.address)
+  await contractMain.deployed()
+  saveContractFiles(contractMain)
 }
 function saveContractFiles(contract) {
   const contractDir = path.join(__dirname, '..', 'frontend', 'src', 'contracts')
@@ -27,7 +26,7 @@ function saveContractFiles(contract) {
 
   fs.writeFileSync(
     path.join(contractDir, `contract-address-${network.name}.json`),
-    JSON.stringify({ PetAdoption: contract.address }, null, 2)
+    JSON.stringify({ MainContract: contract.address }, null, 2)
   )
 
   const MainArtifact = artifacts.readArtifactSync('Main')
@@ -35,6 +34,13 @@ function saveContractFiles(contract) {
   fs.writeFileSync(
     path.join(contractDir, 'Main.json'),
     JSON.stringify(MainArtifact, null, 2)
+  )
+
+  const SessionArtifact = artifacts.readArtifactSync('Session')
+
+  fs.writeFileSync(
+    path.join(contractDir, 'Session.json'),
+    JSON.stringify(SessionArtifact, null, 2)
   )
 }
 main().catch((error) => {

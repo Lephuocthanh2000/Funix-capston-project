@@ -36,6 +36,10 @@
     ]
   },
   "devDependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "materialize-css": "^1.0.0-rc.2",
+    "react-countdown": "^2.3.5",
+    "react-materialize": "^3.10.0",
+    "react-router-dom": "^6.16.0"
   }
 }
