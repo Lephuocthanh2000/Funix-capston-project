@@ -10,4 +10,5 @@ cache
 artifacts
 # frontend
 /frontend/src/contracts/
+/frontend/src/constants.js
 /frontend/src/.env.development/
