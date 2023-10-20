@@ -9,4 +9,5 @@ typechain-types
 cache
 artifacts
 # frontend
-frontend/src/contracts
+/frontend/src/contracts/
+/frontend/src/.env.development/
