@@ -1,68 +1,91 @@
-import { Link } from 'react-router-dom'
+import { isAdmin as checkAdmin } from "./helper";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loadContractWithProvider, loadContractWithSigner } from './helper';
+import M from "materialize-css";
 
-export default function Navbar({
-  isAdmin,
-  isConnected,
-  userAddress,
-  onCreateSession,
-  onDisconnectWallet,
-}) {
-  return (
-    <div>
-      <nav>
-        <div className="row blue darken-2 nav-wrapper">
-          <Link className="col s4 m2 l3 brand-logo left" to="/home">
-            Funix
-          </Link>
-          <ul className="col m7 l6 menu center center-align show-on-med-and-down">
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-            <li>
-              <Link to="/sessions">Sessions</Link>
-            </li>
-            <li>
-              <Link to="/sessionsList">Sessions List</Link>
-            </li>
-            <li>
-              <Link to="/accounts">Accounts</Link>
-            </li>
-          </ul>
-          <ul className="col s8 m3 l3 wallet right show-on-med-and-down">
-            {isAdmin && isConnected ? (
-              <li>
-                <button
-                  onClick={onCreateSession}
-                  className="waves-effect waves-light btn red"
-                >
-                  Create New Session
-                </button>
-              </li>
-            ) : (
-              <li>
-                <button className="waves-effect waves-light btn red">
-                  Connect Wallet
-                </button>
-              </li>
-            )}
-            <li>
-              <a
-                className="dropdown-trigger btn waves-effect waves-light red"
-                data-target="dropdown1"
-              >
-                {isAdmin ? 'Admin Actions' : userAddress}
-              </a>
-              {isAdmin ? (
-                <ul id="dropdown1" className="dropdown-content">
-                  <li>
-                    <a onClick={onDisconnectWallet}>Disconnect Wallet</a>
-                  </li>
-                </ul>
-              ) : null}
-            </li>
-          </ul>
+const NavBar = ({accounts, setAccounts}) => {
+    let navigate = useNavigate()
+    const [isAdmin, setIsAdmin] = useState(false);
+    let isConnected = Boolean(accounts);
+    
+    const connectAccount = async () => {
+        if(window.ethereum) {
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts"
+            });
+            setAccounts(accounts)
+        }
+    }
+
+    const handleAccountsChanged = async (accounts) => {
+        if(window.ethereum) {
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts"
+            });
+        setAccounts(accounts)
+        }
+    }
+
+    const handleDisconnect = () => { 
+        setAccounts(null)
+        isConnected = false;
+        // navigate('/sessions')
+    }
+
+    const getIsAdmin = async () =>{
+        return await checkAdmin();
+    }
+
+    const handleCreateNewSession = async () =>{
+        navigate("./create-session")
+    }
+
+    useEffect(()=>{
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        const options = {
+            inDuration: 150,
+            hover: true
+        }
+        var instances = M.Dropdown.init(elems, options);
+        getIsAdmin().then((_isAdmin) => setIsAdmin(_isAdmin));
+    },[accounts])
+
+
+
+    useEffect(()=>{
+        if(window.ethereum) {
+            window.ethereum.on('accountsChanged', handleDisconnect);
+        };
+        return () => {
+            window.ethereum.removeListener('accountsChanged', handleDisconnect);
+        }
+    },[]);
+
+    return (
+        <div>            
+            <nav>
+            <div className="nav-wrapper">
+            <ul class="left hide-on-med-and-down">
+                <li > <Link to={'/sessions'}>Sessions</Link></li>
+                {isAdmin && <li > <Link to={'/accounts'}>Accounts</Link></li>}
+                {isAdmin && <li > <Link to={'/sessionsList'}>Sessions List</Link></li>}
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                {isAdmin && <li><a className="waves-effect waves-light btn" onClick={handleCreateNewSession}>Create New Session</a></li>}
+                {isConnected ? 
+                (<li><a className="dropdown-trigger btn waves-effect waves-light" data-target='dropdown1'>{`${accounts[0].substring(0, 4)}...${accounts[0].substring(accounts[0].length-4)}`}</a></li>) : 
+                (<li><a className="waves-effect waves-light btn" onClick={connectAccount}>Connect</a></li> )  }
+            </ul>
+            <ul id='dropdown1' class='dropdown-content'>
+                {isConnected && <li > <Link to={`/accounts/${accounts[0]}`}>Account</Link></li>}
+                {isConnected &&<li><a onClick={handleDisconnect}>Disconnect</a></li>}
+            </ul>
+            </div>
+        </nav>
         </div>
-      </nav>
-    </div>
-  )
+    );
 }
+ 
+export default NavBar;
