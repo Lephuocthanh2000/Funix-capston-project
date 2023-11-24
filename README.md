@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # blockchain-capstone-project
 
 Online product valuation application using Blockchain technology.
@@ -16,7 +15,9 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+
 =======
+
 # Funix-capston-project
+
 capstone project in funix academy
->>>>>>> a33f1f60a0ae8561375214cc31854b3c5564c10f
