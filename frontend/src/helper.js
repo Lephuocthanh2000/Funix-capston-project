@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import { MAIN_CONTRACT_ADDRESS, IMAGE_CID_LENGTH } from './constants'
-import Main from '../src/contracts/Main.json'
-import Session from '../src/contracts/Session.json'
+import Main from './contracts/artifacts/contracts/Main.sol/Main.json'
+import Session from './contracts/artifacts/contracts/Session.sol/Session.json'
 import M from 'materialize-css'
 
 export const loadContractWithProvider = async (contractAddress) => {
@@ -49,18 +49,34 @@ export const toStringState = (state) => {
 }
 
 export const getCurrentTimestamp = async () => {
-  const provider = new ethers.providers.JsonRpcProvider('https://bscrpc.com')
+  const provider = new ethers.providers.JsonRpcProvider(
+    'https://eth.public-rpc.com'
+  )
   const blockNumber = await provider.getBlockNumber()
   const timestamp = (await provider.getBlock(blockNumber)).timestamp
   return timestamp
 }
+export const formatBalance = (rawBalance) => {
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
+  return balance
+}
 
+export const formatChainAsNum = (chainIdHex) => {
+  const chainIdNum = parseInt(chainIdHex)
+  return chainIdNum
+}
+
+export const formatAddress = (addr) => {
+  return `${addr.substring(0, 6)}...${addr.substring(
+    addr.length - 4,
+    addr.length
+  )} `
+}
 export const checkIsRegistered = async () => {
   let contract = await loadContractWithSigner(MAIN_CONTRACT_ADDRESS)
   try {
     return await contract.checkRegistered()
   } catch (error) {
-    console.log(error)
     return false
   }
 }
@@ -121,8 +137,3 @@ export const validateSession = (
   }
   return true
 }
-
-// export
-// export const a = async () => {
-//     return "aloo";
-// }

@@ -1,21 +1,16 @@
 const hre = require('hardhat')
 const fs = require('fs')
 const path = require('path')
-
+const { ethers, artifacts } = require('hardhat')
 async function main() {
   console.log('Deployment started!')
-
-  const [deployer] = await ethers.getSigners()
-  const address = await deployer.getAddress()
-
-  console.log(`Deploying the contract with the account: ${address}`)
-
   const Main = await hre.ethers.getContractFactory('Main')
-  const contractMain = await Main.deploy()
-
-  console.log('Contract  deployed to:', contractMain.address)
-  await contractMain.deployed()
-  saveContractFiles(contractMain)
+  const main = await Main.deploy()
+  const [deployer] = await ethers.getSigners()
+  await main.deployed()
+  console.log('Account deployed to:', deployer.address)
+  console.log(' deployed to Address:', main.address)
+  saveContractFiles(main)
 }
 function saveContractFiles(contract) {
   const contractDir = path.join(__dirname, '..', 'frontend', 'src', 'contracts')
@@ -29,8 +24,8 @@ function saveContractFiles(contract) {
     JSON.stringify({ MainContract: contract.address }, null, 2)
   )
 
+  console.log('Saving artifacts to: ', contractDir)
   const MainArtifact = artifacts.readArtifactSync('Main')
-
   fs.writeFileSync(
     path.join(contractDir, 'Main.json'),
     JSON.stringify(MainArtifact, null, 2)

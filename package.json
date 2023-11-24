@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@metamask/sdk-react": "^0.12.1",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.9",
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "@nomiclabs/hardhat-ethers": "^2.0.0",
@@ -23,8 +24,11 @@
     "ether": "^0.0.9",
     "ethereum-waffle": "^4.0.10",
     "ethers": "^5.7.2",
-    "hardhat": "^2.17.4",
+    "hardhat": "^2.19.0",
     "react-materialize": "^3.10.0",
     "react-router-dom": "^6.16.0"
+  },
+  "dependencies": {
+    "@metamask/detect-provider": "^2.0.0"
   }
 }

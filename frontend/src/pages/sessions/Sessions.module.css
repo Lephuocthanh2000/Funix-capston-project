@@ -1,27 +1,34 @@
 .session_icon {
-    border: 1px solid rgba(249, 81, 146, 0.2);
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
+  border: 1px solid rgba(249, 81, 146, 0.2);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }
 
 .session_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .session_header_state {
-    border-radius: 10px;
-    box-shadow: #F9599A 3px 2px 4px;
-    padding: 5px;
-    background-color: #fdeaf1;
-    color: #f95997;
-    font-weight: bold;
+  border-radius: 10px;
+  box-shadow: #f9599a 3px 2px 4px;
+  padding: 5px;
+  background-color: #fdeaf1;
+  color: #f95997;
+  font-weight: bold;
 }
 
 .session_name {
-    font-size: 22px;
-    font-family: 'Roboto Flex', sans-serif;;
-    font-weight: bold;
+  font-size: 22px;
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: bold;
+}
+.sessions_title {
+  text-align: center;
+  font-weight: bold;
+  color: #f9599a 3px 2px 4px;
+  padding: 5px;
+  background-color: #fdeaf1;
 }
