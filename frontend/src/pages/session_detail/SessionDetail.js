@@ -38,7 +38,9 @@ const SessionDetail = () => {
     let _sessionDetail = await contract.getSessionDetail()
     setSessionDetail(_sessionDetail)
     let _state = _sessionDetail.state
-    setState(_state)
+
+    setState(_sessionDetail.state)
+    console.log('_state: ' + state)
     setFinalPrice(ethers.utils.formatEther(_sessionDetail.finalPrice))
     setProductImages(_sessionDetail.productImages)
     let duration = await contract.getSessionDuration()
@@ -131,8 +133,9 @@ const SessionDetail = () => {
     let contract = await loadContractWithSigner(address)
     try {
       if (isAdmin) {
+        const parsedProposePrice = ethers.utils.parseEther(proposePrice)
         let tx = await contract.afterClosingSession(
-          ethers.utils.parseEther(proposePriceInput.toString()),
+          ethers.utils.parseEther(parsedProposePrice),
           { from: wallet.accounts[0] }
         )
         tx.wait().then(async () => {

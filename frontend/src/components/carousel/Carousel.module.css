@@ -1,5 +1,4 @@
 .custom_carousel {
-  margin-top: 100px;
   position: relative !important;
   top: calc(100vh - 800px);
 }

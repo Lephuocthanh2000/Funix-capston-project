@@ -50,7 +50,7 @@ export const toStringState = (state) => {
 
 export const getCurrentTimestamp = async () => {
   const provider = new ethers.providers.JsonRpcProvider(
-    'https://eth.public-rpc.com'
+    ' http://127.0.0.1:8545/'
   )
   const blockNumber = await provider.getBlockNumber()
   const timestamp = (await provider.getBlock(blockNumber)).timestamp

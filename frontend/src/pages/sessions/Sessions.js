@@ -81,7 +81,8 @@ const Sessions = () => {
             >
               <div
                 style={{
-                  height: '50vh',
+                  height: '60vh',
+                  width: '40vh',
                   overflow: 'hidden',
                   border: '1px solid gray',
                   borderRadius: '30px',
